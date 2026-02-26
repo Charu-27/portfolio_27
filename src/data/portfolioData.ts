@@ -103,7 +103,7 @@ export const portfolioData: PortfolioData = {
     { name: "Kubernetes", level: 85, category: "backend" },
     { name: "Git", level: 90, category: "tools" },
     { name: "Docker", level: 75, category: "tools" },
-    { name: "CI/CD", level: 75, category: "tools" },
-    { name: "Redis", level: 80, category: "other" },
+    { name: "CI/CD", level: 85, category: "tools" },
+    { name: "Redis", level: 90, category: "other" },
   ]
 };

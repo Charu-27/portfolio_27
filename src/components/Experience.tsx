@@ -38,7 +38,7 @@ const Experience = ({ experiences }: ExperienceProps) => {
             Experience
           </motion.h2>
           <div className="timeline">
-            {experiences.map((exp, index) => (
+            {experiences.map((exp) => (
               <motion.div
                 key={exp.id}
                 variants={itemVariants}
