@@ -6,9 +6,8 @@ interface SkillsProps {
 }
 
 const Skills = ({ skills }: SkillsProps) => {
-  const categories = ['frontend', 'backend', 'tools', 'other'] as const
+  const categories = ['backend', 'tools', 'other'] as const
   const categoryLabels = {
-    frontend: 'Frontend',
     backend: 'Backend',
     tools: 'Tools & DevOps',
     other: 'Databases & Others',

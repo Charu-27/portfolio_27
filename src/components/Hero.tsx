@@ -65,6 +65,17 @@ const Hero = ({ data, scrollToSection }: HeroProps) => {
           >
             Get In Touch
           </button>
+          {data.resumeUrl && (
+            <a
+              href={data.resumeUrl}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline"
+            >
+              Download Resume
+            </a>
+          )}
         </motion.div>
         <motion.div variants={itemVariants} className="hero-social">
           <a href={data.github} target="_blank" rel="noopener noreferrer" className="social-link">

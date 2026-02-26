@@ -17,7 +17,6 @@ const Contact = ({ data }: ContactProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('sending')
-    // Simulate form submission
     setTimeout(() => {
       setStatus('success')
       setFormData({ name: '', email: '', message: '' })

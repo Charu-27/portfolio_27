@@ -42,9 +42,8 @@ const About = ({ data }: AboutProps) => {
               <p>{data.bio}</p>
               <p>
                 With {data.yearsOfExperience} years of experience in software development, 
-                I've had the opportunity to work on diverse projects ranging from 
-                small startups to enterprise-level applications. I'm passionate about 
-                writing clean, maintainable code and continuously learning new technologies.
+                I’ve gained hands-on experience building and improving backend applications. I’m passionate about writing clean, efficient Java code, optimizing SQL queries, and designing solutions that scale.
+                I believe in continuous learning and constantly explore new tools and technologies to sharpen my development skills
               </p>
             </motion.div>
             <motion.div variants={itemVariants} className="about-stats">
@@ -52,10 +51,7 @@ const About = ({ data }: AboutProps) => {
                 <div className="stat-number">{data.yearsOfExperience}+</div>
                 <div className="stat-label">Years Experience</div>
               </div>
-              <div className="stat-card">
-                <div className="stat-number">10+</div>
-                <div className="stat-label">Projects Completed</div>
-              </div>
+
               <div className="stat-card">
                 <div className="stat-number">5+</div>
                 <div className="stat-label">Technologies</div>

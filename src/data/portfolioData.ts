@@ -1,8 +1,3 @@
-// ============================================
-// PORTFOLIO DATA CONFIGURATION
-// Edit this file to update your portfolio content
-// ============================================
-
 export interface PersonalInfo {
   name: string;
   title: string;
@@ -13,6 +8,7 @@ export interface PersonalInfo {
   linkedin: string;
   bio: string;
   yearsOfExperience: number;
+  resumeUrl?: string;
 }
 
 export interface Experience {
@@ -38,8 +34,8 @@ export interface Project {
 
 export interface Skill {
   name: string;
-  level: number; // 1-100
-  category: 'frontend' | 'backend' | 'tools' | 'other';
+  level: number;
+  category:  'backend' | 'tools' | 'other';
 }
 
 export interface PortfolioData {
@@ -51,109 +47,63 @@ export interface PortfolioData {
 
 export const portfolioData: PortfolioData = {
   personal: {
-    name: "Your Name",
+    name: "Charu Jain",
     title: "Software Engineer",
-    location: "City, Country",
-    email: "your.email@example.com",
-    phone: "+1 (555) 123-4567",
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
-    bio: "Passionate software engineer with 2.5 years of experience building scalable web applications. I love solving complex problems and creating elegant solutions.",
+    location: "Navi Mumbai, Maharastra",
+    email: "charu2722001@gmail.com",
+    phone: "+91 9340078774",
+    github: "https://github.com/Charu-27",
+    linkedin: " https://www.linkedin.com/in/charu-jain272abc/",
+    bio: "Backend-focused Software Engineer crafting scalable microservices with Java and Spring Boot, passionate about building reliable and high-performance systems",
     yearsOfExperience: 2.5,
+    resumeUrl: "https://drive.google.com/file/d/1EN1RXmO97KlN852kYYLT5iMRwRWxOwiI/view?usp=drivesdk",
   },
   experiences: [
     {
       id: "1",
-      company: "Tech Company Inc.",
+      company: "Reliance Jio",
       position: "Software Engineer",
-      duration: "Jan 2022 - Present",
-      location: "Remote",
-      description: [
-        "Developed and maintained full-stack web applications using React, Node.js, and TypeScript",
-        "Collaborated with cross-functional teams to deliver high-quality software solutions",
-        "Implemented responsive UI components and optimized application performance",
-        "Participated in code reviews and contributed to technical decision-making"
-      ],
-      technologies: ["React", "TypeScript", "Node.js", "PostgreSQL", "AWS"]
-    },
-    {
-      id: "2",
-      company: "Startup XYZ",
-      position: "Junior Developer",
-      duration: "Jun 2021 - Dec 2021",
-      location: "San Francisco, CA",
-      description: [
-        "Built user-facing features using React and Redux",
-        "Worked on RESTful API development using Express.js",
-        "Improved application performance by 30% through code optimization",
-        "Mentored interns and contributed to team knowledge sharing"
-      ],
-      technologies: ["React", "Redux", "Express.js", "MongoDB", "Docker"]
+      duration: "Jan 2023 - Present",
+      location: "Navi Mumbai",
+      description: ["Backend-focused Software Engineer with 2.4+ years of experience designing and maintaining microservices using Java and Spring Boot. Experienced in building scalable REST APIs, optimizing system performance, and deploying containerized applications with Docker, Kubernetes, and Azure DevOps"],
+      technologies: ["Java", "Springboot", "RDBMS", "Oracle SQL", "Kubernetes", "Docker", "Azure Devops"]
     }
   ],
   projects: [
     {
       id: "1",
-      name: "E-Commerce Platform",
-      description: "A full-stack e-commerce platform with user authentication, product management, and payment integration.",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe", "JWT"],
-      githubUrl: "https://github.com/yourusername/ecommerce",
-      liveUrl: "https://your-ecommerce-demo.com",
+      name: "Expense Tracker",
+      description: "Personalised Application to manage and track all your expenses at one place",
+      technologies: ["Java", "Springboot", "React", "JavaScript", "Cursor"],
+      githubUrl: "https://github.com/Charu-27/expense-tracker",
+      liveUrl: "https://expensetracker-pi-two.vercel.app/",
       highlights: [
-        "Implemented secure payment processing",
-        "Built responsive admin dashboard",
-        "Achieved 99.9% uptime"
+        "Personalised Application to manage and track all your expenses at one place",
       ]
     },
     {
       id: "2",
-      name: "Task Management App",
-      description: "A collaborative task management application with real-time updates and team collaboration features.",
-      technologies: ["React", "TypeScript", "Socket.io", "PostgreSQL"],
-      githubUrl: "https://github.com/yourusername/task-manager",
-      liveUrl: "https://your-task-app-demo.com",
-      highlights: [
-        "Real-time collaboration features",
-        "Drag-and-drop interface",
-        "Advanced filtering and search"
-      ]
-    },
-    {
-      id: "3",
-      name: "Weather Dashboard",
-      description: "A beautiful weather dashboard with location-based forecasts and interactive maps.",
+      name: "Doc Pocket",
+      description: "A Platform to upload and store all your files and folders.",
       technologies: ["React", "Chart.js", "OpenWeather API", "Leaflet"],
       githubUrl: "https://github.com/yourusername/weather-dashboard",
       liveUrl: "https://your-weather-demo.com",
       highlights: [
-        "Interactive weather maps",
-        "7-day forecast visualization",
-        "Location-based recommendations"
+        "User authentication and authorisation",
+        "cloud based data storage"
       ]
     }
   ],
   skills: [
-    // Frontend
-    { name: "React", level: 90, category: "frontend" },
-    { name: "TypeScript", level: 85, category: "frontend" },
-    { name: "JavaScript", level: 90, category: "frontend" },
-    { name: "HTML/CSS", level: 95, category: "frontend" },
-    { name: "Tailwind CSS", level: 80, category: "frontend" },
-    
-    // Backend
-    { name: "Node.js", level: 85, category: "backend" },
-    { name: "Express.js", level: 80, category: "backend" },
-    { name: "Python", level: 75, category: "backend" },
+    { name: "Java", level: 90, category: "backend" },
+    { name: "Springboot", level: 90, category: "backend" },
+    { name: "Oracle SQL", level: 90, category: "other" },
     { name: "REST APIs", level: 90, category: "backend" },
-    { name: "GraphQL", level: 70, category: "backend" },
-    
-    // Tools & Others
+    { name: "Azure Devops", level: 85, category: "backend" },
+    { name: "Kubernetes", level: 85, category: "backend" },
     { name: "Git", level: 90, category: "tools" },
     { name: "Docker", level: 75, category: "tools" },
-    { name: "AWS", level: 70, category: "tools" },
     { name: "CI/CD", level: 75, category: "tools" },
-    { name: "PostgreSQL", level: 80, category: "other" },
-    { name: "MongoDB", level: 75, category: "other" }
+    { name: "Redis", level: 80, category: "other" },
   ]
 };
-

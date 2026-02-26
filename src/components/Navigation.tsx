@@ -23,9 +23,12 @@ const Navigation = ({ activeSection, scrollToSection }: NavigationProps) => {
       transition={{ duration: 0.5 }}
     >
       <div className="nav-container">
-        <div className="nav-logo">
-          <span className="logo-text">SE</span>
-        </div>
+        <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }} className="nav-logo">
+          <svg className="dev-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </a>
         <ul className="nav-links">
           {navItems.map((item) => (
             <li key={item.id}>
