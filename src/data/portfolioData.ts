@@ -55,8 +55,8 @@ export const portfolioData: PortfolioData = {
     github: "https://github.com/Charu-27",
     linkedin: " https://www.linkedin.com/in/charu-jain272abc/",
     bio: "Backend-focused Software Engineer crafting scalable microservices with Java and Spring Boot, passionate about building reliable and high-performance systems",
-    yearsOfExperience: 2.5,
-    resumeUrl: "https://drive.google.com/file/d/1EN1RXmO97KlN852kYYLT5iMRwRWxOwiI/view?usp=drivesdk",
+    yearsOfExperience: 2.6,
+    resumeUrl: "https://drive.google.com/file/d/15PeuMpUYgyynScURivHyTpKt37Thi133/view?usp=sharing",
   },
   experiences: [
     {
@@ -73,26 +73,31 @@ export const portfolioData: PortfolioData = {
     {
       id: "1",
       name: "Expense Tracker",
-      description: "Personalised Application to manage and track all your expenses at one place",
-      technologies: ["Java", "Springboot", "React", "JavaScript", "Cursor"],
+      description:
+        "Full-stack application to track income and spending. Helps you record transactions and see your money in one place.",
+      technologies: ["TypeScript", "React", "Java", "Spring Boot"],
       githubUrl: "https://github.com/Charu-27/expense-tracker",
       liveUrl: "https://expensetracker-pi-two.vercel.app/",
       highlights: [
-        "Personalised Application to manage and track all your expenses at one place",
-      ]
+        "Track expenses and categories in a single dashboard",
+        "REST APIs with a Spring Boot backend",
+        "React front end deployed on Vercel",
+      ],
     },
     {
       id: "2",
       name: "Doc Pocket",
-      description: "A Platform to upload and store all your files and folders.",
-      technologies: ["React", "Chart.js", "OpenWeather API", "Leaflet"],
-      githubUrl: "https://github.com/yourusername/weather-dashboard",
-      liveUrl: "https://your-weather-demo.com",
+      description:
+        "Web app to organise documents in folders and upload different file types. Built with React and Firebase for sign-in and cloud storage.",
+      technologies: ["React", "Firebase", "JavaScript"],
+      githubUrl: "https://github.com/Charu-27/Doc_Pocket",
+      liveUrl: "https://doc-pocket.vercel.app",
       highlights: [
-        "User authentication and authorisation",
-        "cloud based data storage"
-      ]
-    }
+        "User authentication with Firebase",
+        "Cloud storage for files and folders",
+        "Folder-based document organisation",
+      ],
+    },
   ],
   skills: [
     { name: "Java", level: 90, category: "backend" },
