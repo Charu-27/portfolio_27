@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -40,15 +41,20 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <motion.div
+      className="app"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+    >
       <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
       <Hero data={portfolioData.personal} scrollToSection={scrollToSection} />
       <About data={portfolioData.personal} />
       <Experience experiences={portfolioData.experiences} />
-      <Skills skills={portfolioData.skills} />
+      <Skills groups={portfolioData.skillGroups} />
       <Projects projects={portfolioData.projects} />
       <Contact data={portfolioData.personal} />
-    </div>
+    </motion.div>
   )
 }
 

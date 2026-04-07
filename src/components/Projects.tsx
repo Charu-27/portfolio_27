@@ -34,8 +34,10 @@ const Projects = ({ projects }: ProjectsProps) => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <motion.h2 variants={itemVariants} className="section-title">
-            Featured Projects
+          <motion.h2 variants={itemVariants} className="section-title section-title--gradient">
+            <span className="section-title__num">05</span>
+            <span className="section-title__slash">/</span>
+            <span className="section-title__text">Projects</span>
           </motion.h2>
           <div className="projects-grid">
             {projects.map((project) => (
@@ -43,8 +45,8 @@ const Projects = ({ projects }: ProjectsProps) => {
                 key={project.id}
                 variants={itemVariants}
                 className="project-card"
-                whileHover={{ y: -10 }}
-                transition={{ type: 'spring', stiffness: 300 }}
+                whileHover={{ y: -4 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 28 }}
               >
                 <div className="project-image">
                   <div className="project-placeholder">

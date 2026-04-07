@@ -56,8 +56,10 @@ const Contact = ({ data }: ContactProps) => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.h2 variants={itemVariants} className="section-title">
-            Get In Touch
+          <motion.h2 variants={itemVariants} className="section-title section-title--gradient">
+            <span className="section-title__num">06</span>
+            <span className="section-title__slash">/</span>
+            <span className="section-title__text">Contact</span>
           </motion.h2>
           <div className="contact-content">
             <motion.div variants={itemVariants} className="contact-info">

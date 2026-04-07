@@ -34,8 +34,10 @@ const Experience = ({ experiences }: ExperienceProps) => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.h2 variants={itemVariants} className="section-title">
-            Experience
+          <motion.h2 variants={itemVariants} className="section-title section-title--gradient">
+            <span className="section-title__num">03</span>
+            <span className="section-title__slash">/</span>
+            <span className="section-title__text">Experience</span>
           </motion.h2>
           <div className="timeline">
             {experiences.map((exp) => (

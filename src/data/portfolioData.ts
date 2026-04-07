@@ -32,17 +32,22 @@ export interface Project {
   highlights: string[];
 }
 
-export interface Skill {
+export interface SkillGroupItem {
   name: string;
-  level: number;
-  category:  'backend' | 'tools' | 'other';
+  iconSlug?: string;
+}
+
+export interface SkillGroup {
+  id: string;
+  title: string;
+  items: SkillGroupItem[];
 }
 
 export interface PortfolioData {
   personal: PersonalInfo;
   experiences: Experience[];
   projects: Project[];
-  skills: Skill[];
+  skillGroups: SkillGroup[];
 }
 
 export const portfolioData: PortfolioData = {
@@ -53,7 +58,7 @@ export const portfolioData: PortfolioData = {
     email: "charu2722001@gmail.com",
     phone: "+91 9340078774",
     github: "https://github.com/Charu-27",
-    linkedin: " https://www.linkedin.com/in/charu-jain272abc/",
+    linkedin: "https://www.linkedin.com/in/charu-jain272abc/",
     bio: "Backend-focused Software Engineer crafting scalable microservices with Java and Spring Boot, passionate about building reliable and high-performance systems",
     yearsOfExperience: 2.6,
     resumeUrl: "https://drive.google.com/file/d/15PeuMpUYgyynScURivHyTpKt37Thi133/view?usp=sharing",
@@ -65,7 +70,7 @@ export const portfolioData: PortfolioData = {
       position: "Software Engineer",
       duration: "Jan 2023 - Present",
       location: "Navi Mumbai",
-      description: ["Backend-focused Software Engineer with 2.4+ years of experience designing and maintaining microservices using Java and Spring Boot. Experienced in building scalable REST APIs, optimizing system performance, and deploying containerized applications with Docker, Kubernetes, and Azure DevOps"],
+      description: ["Backend-focused Software Engineer with 2.6 years of experience designing and maintaining microservices using Java and Spring Boot. Experienced in building scalable REST APIs, optimizing system performance, and deploying containerized applications with Docker, Kubernetes, and Azure DevOps"],
       technologies: ["Java", "Springboot", "RDBMS", "Oracle SQL", "Kubernetes", "Docker", "Azure Devops"]
     }
   ],
@@ -75,7 +80,7 @@ export const portfolioData: PortfolioData = {
       name: "Expense Tracker",
       description:
         "Full-stack application to track income and spending. Helps you record transactions and see your money in one place.",
-      technologies: ["TypeScript", "React", "Java", "Spring Boot"],
+      technologies: ["React", "Java", "Spring Boot"],
       githubUrl: "https://github.com/Charu-27/expense-tracker",
       liveUrl: "https://expensetracker-pi-two.vercel.app/",
       highlights: [
@@ -89,7 +94,7 @@ export const portfolioData: PortfolioData = {
       name: "Doc Pocket",
       description:
         "Web app to organise documents in folders and upload different file types. Built with React and Firebase for sign-in and cloud storage.",
-      technologies: ["React", "Firebase", "JavaScript"],
+      technologies: ["React", "Firebase"],
       githubUrl: "https://github.com/Charu-27/Doc_Pocket",
       liveUrl: "https://doc-pocket.vercel.app",
       highlights: [
@@ -99,16 +104,48 @@ export const portfolioData: PortfolioData = {
       ],
     },
   ],
-  skills: [
-    { name: "Java", level: 90, category: "backend" },
-    { name: "Springboot", level: 90, category: "backend" },
-    { name: "Oracle SQL", level: 90, category: "other" },
-    { name: "REST APIs", level: 90, category: "backend" },
-    { name: "Azure Devops", level: 85, category: "backend" },
-    { name: "Kubernetes", level: 85, category: "backend" },
-    { name: "Git", level: 90, category: "tools" },
-    { name: "Docker", level: 75, category: "tools" },
-    { name: "CI/CD", level: 85, category: "tools" },
-    { name: "Redis", level: 90, category: "other" },
-  ]
+  skillGroups: [
+    {
+      id: "languages",
+      title: "Programming Languages",
+      items: [
+        { name: "Java", iconSlug: "java" },
+        { name: "C++", iconSlug: "cplusplus" },
+        { name: "SQL", iconSlug: "oracle" },
+      ],
+    },
+    {
+      id: "backend",
+      title: "Backend Technologies",
+      items: [
+        { name: "Spring Boot", iconSlug: "springboot" },
+        { name: "REST APIs", iconSlug: "openapiinitiative" },
+        { name: "Microservices", iconSlug: "nginx" },
+        { name: "Hibernate / JPA", iconSlug: "hibernate" },
+        { name: "Postman", iconSlug: "postman" },
+        { name: "Kafka", iconSlug: "apachekafka" },
+      ],
+    },
+    {
+      id: "data",
+      title: "Databases & Caching",
+      items: [
+        { name: "Oracle SQL", iconSlug: "oracle" },
+        { name: "Redis", iconSlug: "redis" },
+      ],
+    },
+    {
+      id: "devops",
+      title: "DevOps & Cloud",
+      items: [
+        { name: "Docker", iconSlug: "docker" },
+        { name: "Kubernetes", iconSlug: "kubernetes" },
+        { name: "Azure DevOps", iconSlug: "azuredevops" },
+        { name: "Git", iconSlug: "git" },
+        { name: "GitHub", iconSlug: "github" },
+        { name: "CI/CD", iconSlug: "githubactions" },
+        { name: "Linux", iconSlug: "linux" },
+      ],
+    },
+  ],
 };

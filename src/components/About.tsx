@@ -34,8 +34,10 @@ const About = ({ data }: AboutProps) => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.h2 variants={itemVariants} className="section-title">
-            About Me
+          <motion.h2 variants={itemVariants} className="section-title section-title--gradient">
+            <span className="section-title__num">02</span>
+            <span className="section-title__slash">/</span>
+            <span className="section-title__text">About</span>
           </motion.h2>
           <div className="about-content">
             <motion.div variants={itemVariants} className="about-text">
@@ -48,12 +50,12 @@ const About = ({ data }: AboutProps) => {
             </motion.div>
             <motion.div variants={itemVariants} className="about-stats">
               <div className="stat-card">
-                <div className="stat-number">{data.yearsOfExperience}+</div>
+                <div className="stat-number">{data.yearsOfExperience}</div>
                 <div className="stat-label">Years Experience</div>
               </div>
 
               <div className="stat-card">
-                <div className="stat-number">5+</div>
+                <div className="stat-number">10+</div>
                 <div className="stat-label">Technologies</div>
               </div>
             </motion.div>
