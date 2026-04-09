@@ -1,61 +1,90 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
+import {
+  fadeUp,
+  springSnappy,
+  staggerContainer,
+  staggerPassThrough,
+  viewportOnce,
+} from '../motion/variants'
 import { Project } from '../data/portfolioData'
 
 interface ProjectsProps {
   projects: Project[]
 }
 
+const PROJECT_IMAGE_FALLBACK =
+  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80&auto=format&fit=crop'
+
+function ProjectCover({ image }: { image?: string }) {
+  const [failedPrimary, setFailedPrimary] = useState(false)
+  const [failedBackup, setFailedBackup] = useState(false)
+
+  if (!image?.trim() || failedBackup) {
+    return (
+      <div className="project-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+          <line x1="3" y1="9" x2="21" y2="9" />
+          <line x1="9" y1="21" x2="9" y2="9" />
+        </svg>
+      </div>
+    )
+  }
+
+  if (!failedPrimary) {
+    return (
+      <img
+        className="project-image__img"
+        src={image}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        referrerPolicy="no-referrer"
+        onError={() => setFailedPrimary(true)}
+      />
+    )
+  }
+
+  return (
+    <img
+      className="project-image__img"
+      src={PROJECT_IMAGE_FALLBACK}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      referrerPolicy="no-referrer"
+      onError={() => setFailedBackup(true)}
+    />
+  )
+}
+
 const Projects = ({ projects }: ProjectsProps) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  }
-
   return (
     <section id="projects" className="projects">
       <div className="container">
         <motion.div
-          variants={containerVariants}
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={viewportOnce}
         >
-          <motion.h2 variants={itemVariants} className="section-title section-title--gradient">
+          <motion.h2 variants={fadeUp} className="section-title section-title--gradient">
             <span className="section-title__num">05</span>
             <span className="section-title__slash">/</span>
             <span className="section-title__text">Projects</span>
           </motion.h2>
-          <div className="projects-grid">
+          <motion.div className="projects-grid" variants={staggerPassThrough}>
             {projects.map((project) => (
               <motion.div
                 key={project.id}
-                variants={itemVariants}
+                variants={fadeUp}
                 className="project-card"
-                whileHover={{ y: -4 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+                whileHover={{ y: -6, transition: springSnappy }}
+                whileTap={{ scale: 0.99 }}
               >
                 <div className="project-image">
-                  <div className="project-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                      <line x1="3" y1="9" x2="21" y2="9"/>
-                      <line x1="9" y1="21" x2="9" y2="9"/>
-                    </svg>
-                  </div>
+                  <ProjectCover image={project.image} />
                 </div>
                 <div className="project-content">
                   <h3 className="project-name">{project.name}</h3>
@@ -105,7 +134,7 @@ const Projects = ({ projects }: ProjectsProps) => {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

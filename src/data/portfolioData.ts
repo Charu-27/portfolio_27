@@ -43,8 +43,20 @@ export interface SkillGroup {
   items: SkillGroupItem[];
 }
 
+export interface Education {
+  id: string;
+  institution: string;
+  institutionLocation: string;
+  degree: string;
+  field: string;
+  startYear: number;
+  endYear: number;
+  cgpa: string;
+}
+
 export interface PortfolioData {
   personal: PersonalInfo;
+  education: Education[];
   experiences: Experience[];
   projects: Project[];
   skillGroups: SkillGroup[];
@@ -54,7 +66,7 @@ export const portfolioData: PortfolioData = {
   personal: {
     name: "Charu Jain",
     title: "Software Engineer",
-    location: "Navi Mumbai, Maharastra",
+    location: "Navi Mumbai, Maharashtra",
     email: "charu2722001@gmail.com",
     phone: "+91 9340078774",
     github: "https://github.com/Charu-27",
@@ -63,6 +75,18 @@ export const portfolioData: PortfolioData = {
     yearsOfExperience: 2.6,
     resumeUrl: "https://drive.google.com/file/d/15PeuMpUYgyynScURivHyTpKt37Thi133/view?usp=sharing",
   },
+  education: [
+    {
+      id: "1",
+      institution: "Gyan Ganga College of Technology",
+      institutionLocation: "Jabalpur, Madhya Pradesh",
+      degree: "B.Tech",
+      field: "Computer Science & Engineering",
+      startYear: 2019,
+      endYear: 2023,
+      cgpa: "9.3",
+    },
+  ],
   experiences: [
     {
       id: "1",
@@ -80,6 +104,8 @@ export const portfolioData: PortfolioData = {
       name: "Expense Tracker",
       description:
         "Full-stack application to track income and spending. Helps you record transactions and see your money in one place.",
+      image:
+        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=85&auto=format&fit=crop",
       technologies: ["React", "Java", "Spring Boot"],
       githubUrl: "https://github.com/Charu-27/expense-tracker",
       liveUrl: "https://expensetracker-pi-two.vercel.app/",
@@ -94,6 +120,8 @@ export const portfolioData: PortfolioData = {
       name: "Doc Pocket",
       description:
         "Web app to organise documents in folders and upload different file types. Built with React and Firebase for sign-in and cloud storage.",
+      image:
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80&auto=format&fit=crop",
       technologies: ["React", "Firebase"],
       githubUrl: "https://github.com/Charu-27/Doc_Pocket",
       liveUrl: "https://doc-pocket.vercel.app",
@@ -109,7 +137,7 @@ export const portfolioData: PortfolioData = {
       id: "languages",
       title: "Programming Languages",
       items: [
-        { name: "Java", iconSlug: "java" },
+        { name: "Java", iconSlug: "openjdk" },
         { name: "C++", iconSlug: "cplusplus" },
         { name: "SQL", iconSlug: "oracle" },
       ],

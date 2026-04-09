@@ -1,4 +1,11 @@
 import { motion } from 'framer-motion'
+import {
+  slideInLeft,
+  staggerContainer,
+  staggerPassThrough,
+  springSoft,
+  viewportOnce,
+} from '../motion/variants'
 import { Experience as ExperienceType } from '../data/portfolioData'
 
 interface ExperienceProps {
@@ -6,45 +13,27 @@ interface ExperienceProps {
 }
 
 const Experience = ({ experiences }: ExperienceProps) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.5 },
-    },
-  }
-
   return (
     <section id="experience" className="experience">
       <div className="container">
         <motion.div
-          variants={containerVariants}
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={viewportOnce}
         >
-          <motion.h2 variants={itemVariants} className="section-title section-title--gradient">
+          <motion.h2 variants={slideInLeft} className="section-title section-title--gradient">
             <span className="section-title__num">03</span>
             <span className="section-title__slash">/</span>
             <span className="section-title__text">Experience</span>
           </motion.h2>
-          <div className="timeline">
+          <motion.div className="timeline" variants={staggerPassThrough}>
             {experiences.map((exp) => (
               <motion.div
                 key={exp.id}
-                variants={itemVariants}
+                variants={slideInLeft}
                 className="timeline-item"
+                whileHover={{ x: 6, transition: springSoft }}
               >
                 <div className="timeline-marker"></div>
                 <div className="timeline-content">
@@ -71,7 +60,7 @@ const Experience = ({ experiences }: ExperienceProps) => {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

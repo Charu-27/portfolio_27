@@ -1,6 +1,15 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import {
+  fadeUp,
+  springSnappy,
+  staggerContainer,
+  staggerPassThrough,
+  viewportOnce,
+} from '../motion/variants'
 import { SkillGroup } from '../data/portfolioData'
+
+const SI_PKG = '11.0.0'
 
 interface SkillsProps {
   groups: SkillGroup[]
@@ -22,7 +31,7 @@ function SkillIcon({ name, iconSlug }: { name: string; iconSlug?: string }) {
 
   return (
     <img
-      src={`https://cdn.simpleicons.org/${iconSlug}/e2e8f0`}
+      src={`https://cdn.jsdelivr.net/npm/simple-icons@${SI_PKG}/icons/${iconSlug}.svg`}
       alt=""
       width={32}
       height={32}
@@ -40,32 +49,26 @@ const Skills = ({ groups }: SkillsProps) => {
     <section id="skills" className="skills">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.12 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
         >
-          <h2 className="section-title section-title--gradient">
+          <motion.h2 variants={fadeUp} className="section-title section-title--gradient">
             <span className="section-title__num">04</span>
             <span className="section-title__slash">/</span>
             <span className="section-title__text">Skills</span>
-          </h2>
-          <p className="skills-intro">
+          </motion.h2>
+          <motion.p variants={fadeUp} className="skills-intro">
             Technologies I use to build scalable backend systems and full-stack features.
-          </p>
-          <div className="skills-board">
+          </motion.p>
+          <motion.div className="skills-board" variants={staggerPassThrough}>
             {groups.map((group, groupIdx) => (
               <motion.article
                 key={group.id}
                 className="skills-category-card"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.5,
-                  delay: groupIdx * 0.08,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
+                variants={fadeUp}
+                whileHover={{ y: -3, transition: springSnappy }}
               >
                 <div className="skills-category-card__glow" aria-hidden />
                 <h3 className="skills-category-title">{group.title}</h3>
@@ -77,7 +80,7 @@ const Skills = ({ groups }: SkillsProps) => {
                       className="skill-icon-tile"
                       initial={{ opacity: 0, scale: 0.92 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, amount: 0.3 }}
+                      viewport={viewportOnce}
                       transition={{
                         duration: 0.4,
                         delay: groupIdx * 0.06 + i * 0.04,
@@ -93,7 +96,7 @@ const Skills = ({ groups }: SkillsProps) => {
                 </ul>
               </motion.article>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

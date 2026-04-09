@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
+import { HeroTechStack } from './HeroTechStack'
+import { springSnappy } from '../motion/variants'
 import { PersonalInfo } from '../data/portfolioData'
 
 interface HeroProps {
@@ -7,23 +9,25 @@ interface HeroProps {
 }
 
 const Hero = ({ data, scrollToSection }: HeroProps) => {
+  const reduce = useReducedMotion()
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.15,
+        staggerChildren: 0.1,
+        delayChildren: 0.12,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 22 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
     },
   }
 
@@ -57,12 +61,26 @@ const Hero = ({ data, scrollToSection }: HeroProps) => {
               {data.bio}
             </motion.p>
             <motion.div variants={itemVariants} className="hero-buttons">
-              <button type="button" className="btn btn-primary" onClick={() => scrollToSection('projects')}>
+              <motion.button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => scrollToSection('projects')}
+                whileHover={reduce ? undefined : { scale: 1.02 }}
+                whileTap={reduce ? undefined : { scale: 0.98 }}
+                transition={springSnappy}
+              >
                 Explore my work
-              </button>
-              <button type="button" className="btn btn-secondary" onClick={() => scrollToSection('contact')}>
+              </motion.button>
+              <motion.button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => scrollToSection('contact')}
+                whileHover={reduce ? undefined : { scale: 1.02 }}
+                whileTap={reduce ? undefined : { scale: 0.98 }}
+                transition={springSnappy}
+              >
                 Get in touch
-              </button>
+              </motion.button>
               {data.resumeUrl && (
                 <a
                   href={data.resumeUrl}
@@ -98,19 +116,11 @@ const Hero = ({ data, scrollToSection }: HeroProps) => {
           <motion.div
             className="hero-aside"
             variants={itemVariants}
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 28 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.65, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.55, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="hero-visual">
-              <img
-                className="hero-visual__img"
-                src="/hero-image.png"
-                alt="Developer workspace and software engineering illustration"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
+            <HeroTechStack />
           </motion.div>
         </motion.div>
       </div>
@@ -118,7 +128,7 @@ const Hero = ({ data, scrollToSection }: HeroProps) => {
         className="scroll-indicator"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+        transition={{ delay: 1 }}
       >
         <button type="button" className="scroll-indicator__btn" onClick={() => scrollToSection('about')} aria-label="Scroll to about">
           <span className="scroll-indicator__text">Scroll</span>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { PageBackdrop } from './components/PageBackdrop'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -7,14 +8,15 @@ import Experience from './components/Experience'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
+import { PortfolioGameLayer } from './components/PortfolioGameLayer'
 import { portfolioData } from './data/portfolioData'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
+    const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
     const handleScroll = () => {
-      const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -29,7 +31,8 @@ function App() {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -47,13 +50,17 @@ function App() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
     >
-      <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
-      <Hero data={portfolioData.personal} scrollToSection={scrollToSection} />
-      <About data={portfolioData.personal} />
-      <Experience experiences={portfolioData.experiences} />
-      <Skills groups={portfolioData.skillGroups} />
-      <Projects projects={portfolioData.projects} />
-      <Contact data={portfolioData.personal} />
+      <PageBackdrop />
+      <div className="app__surface">
+        <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
+        <Hero data={portfolioData.personal} scrollToSection={scrollToSection} />
+        <About data={portfolioData.personal} education={portfolioData.education} />
+        <Experience experiences={portfolioData.experiences} />
+        <Skills groups={portfolioData.skillGroups} />
+        <Projects projects={portfolioData.projects} />
+        <Contact data={portfolioData.personal} />
+        <PortfolioGameLayer activeSection={activeSection} scrollToSection={scrollToSection} />
+      </div>
     </motion.div>
   )
 }
