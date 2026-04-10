@@ -13,6 +13,8 @@ const STORAGE_VISITED = 'portfolio-game-visited'
 const STORAGE_COMPLETE = 'portfolio-game-quest-done'
 
 interface PortfolioGameLayerProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
   activeSection: string
   scrollToSection: (sectionId: string) => void
 }
@@ -32,14 +34,18 @@ function saveVisited(set: Set<string>) {
   localStorage.setItem(STORAGE_VISITED, JSON.stringify([...set]))
 }
 
-export function PortfolioGameLayer({ activeSection, scrollToSection }: PortfolioGameLayerProps) {
+export function PortfolioGameLayer({
+  open,
+  onOpenChange,
+  activeSection,
+  scrollToSection,
+}: PortfolioGameLayerProps) {
   const reduceMotion = useReducedMotion()
   const [visited, setVisited] = useState<Set<string>>(loadVisited)
   const [questToast, setQuestToast] = useState(false)
   const [questDonePersisted, setQuestDonePersisted] = useState(
     () => localStorage.getItem(STORAGE_COMPLETE) === '1',
   )
-  const [open, setOpen] = useState(true)
 
   useEffect(() => {
     setVisited((prev) => {
@@ -58,8 +64,6 @@ export function PortfolioGameLayer({ activeSection, scrollToSection }: Portfolio
     setQuestToast(true)
     localStorage.setItem(STORAGE_COMPLETE, '1')
     setQuestDonePersisted(true)
-    const t = window.setTimeout(() => setQuestToast(false), 4200)
-    return () => clearTimeout(t)
   }, [allVisited, questDonePersisted])
 
   const progress = useMemo(
@@ -67,60 +71,106 @@ export function PortfolioGameLayer({ activeSection, scrollToSection }: Portfolio
     [visited],
   )
 
+  const dismissQuest = () => setQuestToast(false)
+
+  const goTo = (id: string) => {
+    scrollToSection(id)
+    onOpenChange(false)
+  }
+
   return (
     <>
-      <div className={`island-panel ${open ? 'island-panel--open' : ''}`} aria-hidden={false}>
-        <button
-          type="button"
-          className="island-panel__tab"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-controls="island-panel-content"
-        >
-          <span className="island-panel__tab-icon" aria-hidden>
-            🗺
-          </span>
-          <span className="island-panel__tab-label">Map</span>
-        </button>
-
-        <aside
-          id="island-panel-content"
-          className="island-panel__sheet"
-          aria-label="Section route map"
-        >
-          <div className="island-panel__head">
-            <h2 className="island-panel__title">Your route</h2>
-            <p className="island-panel__sub">
-              Tap a step to jump · {visited.size}/{CHECKPOINTS.length} visited
-            </p>
-          </div>
-          <div className="island-panel__map island-panel__map--route">
-            <VerticalSectionRoute
-              visited={visited}
-              activeSection={activeSection}
-              scrollToSection={scrollToSection}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="map-drawer"
+            className="map-drawer-root"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <button
+              type="button"
+              className="map-drawer-backdrop"
+              aria-label="Close map"
+              onClick={() => onOpenChange(false)}
             />
-          </div>
-          <div className="island-panel__progress" aria-hidden>
-            <div className="island-panel__progress-bar" style={{ width: `${progress}%` }} />
-          </div>
-          <p className="island-panel__foot">Visit every stop to chart the full profile.</p>
-        </aside>
-      </div>
+            <motion.aside
+              id="map-drawer-content"
+              className="map-drawer"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="map-drawer-title"
+              initial={reduceMotion ? false : { x: '100%' }}
+              animate={{ x: 0 }}
+              exit={reduceMotion ? undefined : { x: '100%' }}
+              transition={{ type: 'spring', stiffness: 380, damping: 34 }}
+            >
+              <div className="map-drawer__head">
+                <h2 id="map-drawer-title" className="map-drawer__title">
+                  Your route
+                </h2>
+                <button
+                  type="button"
+                  className="map-drawer__close"
+                  onClick={() => onOpenChange(false)}
+                  aria-label="Close map"
+                >
+                  ×
+                </button>
+              </div>
+              <p className="map-drawer__sub">
+                Tap a step to jump · {visited.size}/{CHECKPOINTS.length} visited
+              </p>
+              <div className="map-drawer__body">
+                <VerticalSectionRoute
+                  visited={visited}
+                  activeSection={activeSection}
+                  scrollToSection={goTo}
+                />
+              </div>
+              <div className="map-drawer__progress" aria-hidden>
+                <div className="map-drawer__progress-bar" style={{ width: `${progress}%` }} />
+              </div>
+              <p className="map-drawer__foot">Visit every stop to chart the full profile.</p>
+            </motion.aside>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {questToast && (
           <motion.div
-            className="game-toast"
-            role="status"
-            initial={reduceMotion ? false : { opacity: 0, y: 40, scale: 0.92 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={reduceMotion ? undefined : { opacity: 0, y: 20 }}
-            transition={{ type: 'spring', stiffness: 380, damping: 28 }}
+            key="quest-toast"
+            className="game-toast-root"
+            role="presentation"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
           >
-            <span className="game-toast__badge">Map cleared</span>
-            <span className="game-toast__title">You explored the whole profile</span>
-            <span className="game-toast__sub">Every zone on the route has been visited.</span>
+            <button type="button" className="game-toast-backdrop" aria-label="Dismiss" onClick={dismissQuest} />
+            <motion.div
+              className="game-toast"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="quest-toast-title"
+              initial={reduceMotion ? false : { opacity: 0, y: 14, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={reduceMotion ? undefined : { opacity: 0, y: 10, scale: 0.98 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button type="button" className="game-toast__close" onClick={dismissQuest} aria-label="Close">
+                ×
+              </button>
+              <span className="game-toast__badge">Map cleared</span>
+              <span id="quest-toast-title" className="game-toast__title">
+                You explored the whole profile
+              </span>
+              <span className="game-toast__sub">Every zone on the route has been visited.</span>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

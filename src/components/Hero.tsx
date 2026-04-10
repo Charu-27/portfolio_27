@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { HeroTechStack } from './HeroTechStack'
+import { HeroTechHub } from './HeroTechHub'
 import { springSnappy } from '../motion/variants'
 import { PersonalInfo } from '../data/portfolioData'
 
@@ -120,7 +120,7 @@ const Hero = ({ data, scrollToSection }: HeroProps) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.55, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
-            <HeroTechStack />
+            <HeroTechHub />
           </motion.div>
         </motion.div>
       </div>

@@ -5,6 +5,10 @@ import { useThemeContext } from '../theme/ThemeProvider'
 interface NavigationProps {
   activeSection: string
   scrollToSection: (sectionId: string) => void
+  /** Section-route map: only shown on small viewports (see App). */
+  showMapControl?: boolean
+  mapOpen?: boolean
+  onMapToggle?: () => void
 }
 
 const navItems = [
@@ -69,7 +73,13 @@ function NavGlyph({ id }: { id: (typeof navItems)[number]['id'] }) {
 
 const springTab = { type: 'spring' as const, stiffness: 380, damping: 32 }
 
-const Navigation = ({ activeSection, scrollToSection }: NavigationProps) => {
+const Navigation = ({
+  activeSection,
+  scrollToSection,
+  showMapControl,
+  mapOpen,
+  onMapToggle,
+}: NavigationProps) => {
   const { theme, toggleTheme } = useThemeContext()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -148,6 +158,23 @@ const Navigation = ({ activeSection, scrollToSection }: NavigationProps) => {
               </li>
             ))}
           </ul>
+          {showMapControl && onMapToggle && (
+            <button
+              type="button"
+              className={`nav-map-btn theme-toggle${mapOpen ? ' nav-map-btn--active' : ''}`}
+              onClick={onMapToggle}
+              aria-expanded={mapOpen}
+              aria-controls="map-drawer-content"
+              aria-label={mapOpen ? 'Close section map' : 'Open section map'}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <polygon points="1 6 1 22 8 18 8 2 1 6" />
+                <path d="M8 2v16l7 4V6l-7-4z" />
+                <line x1="8" y1="10" x2="15" y2="6" />
+                <line x1="8" y1="14" x2="15" y2="10" />
+              </svg>
+            </button>
+          )}
           <button
             type="button"
             className="theme-toggle"

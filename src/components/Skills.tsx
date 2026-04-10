@@ -8,8 +8,7 @@ import {
   viewportOnce,
 } from '../motion/variants'
 import { SkillGroup } from '../data/portfolioData'
-
-const SI_PKG = '11.0.0'
+import { techIconSrc } from '../utils/techIcons'
 
 interface SkillsProps {
   groups: SkillGroup[]
@@ -31,7 +30,7 @@ function SkillIcon({ name, iconSlug }: { name: string; iconSlug?: string }) {
 
   return (
     <img
-      src={`https://cdn.jsdelivr.net/npm/simple-icons@${SI_PKG}/icons/${iconSlug}.svg`}
+      src={techIconSrc(iconSlug)}
       alt=""
       width={32}
       height={32}

@@ -10,9 +10,25 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import { PortfolioGameLayer } from './components/PortfolioGameLayer'
 import { portfolioData } from './data/portfolioData'
+import { useMediaQuery } from './hooks/useMediaQuery'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
+  const showMapUi = useMediaQuery('(max-width: 959px)')
+  const [mapOpen, setMapOpen] = useState(false)
+
+  useEffect(() => {
+    if (!showMapUi) setMapOpen(false)
+  }, [showMapUi])
+
+  useEffect(() => {
+    if (!showMapUi || !mapOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [showMapUi, mapOpen])
 
   useEffect(() => {
     const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
@@ -52,14 +68,27 @@ function App() {
     >
       <PageBackdrop />
       <div className="app__surface">
-        <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
+        <Navigation
+          activeSection={activeSection}
+          scrollToSection={scrollToSection}
+          mapOpen={mapOpen}
+          onMapToggle={() => setMapOpen((o) => !o)}
+          showMapControl={showMapUi}
+        />
         <Hero data={portfolioData.personal} scrollToSection={scrollToSection} />
         <About data={portfolioData.personal} education={portfolioData.education} />
         <Experience experiences={portfolioData.experiences} />
         <Skills groups={portfolioData.skillGroups} />
         <Projects projects={portfolioData.projects} />
         <Contact data={portfolioData.personal} />
-        <PortfolioGameLayer activeSection={activeSection} scrollToSection={scrollToSection} />
+        {showMapUi && (
+          <PortfolioGameLayer
+            open={mapOpen}
+            onOpenChange={setMapOpen}
+            activeSection={activeSection}
+            scrollToSection={scrollToSection}
+          />
+        )}
       </div>
     </motion.div>
   )

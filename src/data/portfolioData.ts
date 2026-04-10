@@ -104,8 +104,7 @@ export const portfolioData: PortfolioData = {
       name: "Expense Tracker",
       description:
         "Full-stack application to track income and spending. Helps you record transactions and see your money in one place.",
-      image:
-        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=85&auto=format&fit=crop",
+      image: '/images/projects/expense-tracker.jpg',
       technologies: ["React", "Java", "Spring Boot"],
       githubUrl: "https://github.com/Charu-27/expense-tracker",
       liveUrl: "https://expensetracker-pi-two.vercel.app/",
@@ -120,8 +119,7 @@ export const portfolioData: PortfolioData = {
       name: "Doc Pocket",
       description:
         "Web app to organise documents in folders and upload different file types. Built with React and Firebase for sign-in and cloud storage.",
-      image:
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80&auto=format&fit=crop",
+      image: '/images/projects/doc-pocket.jpg',
       technologies: ["React", "Firebase"],
       githubUrl: "https://github.com/Charu-27/Doc_Pocket",
       liveUrl: "https://doc-pocket.vercel.app",

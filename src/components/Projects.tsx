@@ -13,8 +13,7 @@ interface ProjectsProps {
   projects: Project[]
 }
 
-const PROJECT_IMAGE_FALLBACK =
-  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80&auto=format&fit=crop'
+const PROJECT_IMAGE_FALLBACK = '/images/projects/fallback-cover.jpg'
 
 function ProjectCover({ image }: { image?: string }) {
   const [failedPrimary, setFailedPrimary] = useState(false)
