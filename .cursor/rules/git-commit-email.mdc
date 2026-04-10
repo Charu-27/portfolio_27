@@ -1,0 +1,16 @@
+---
+description: Git author email by host — GitHub vs Azure DevOps
+alwaysApply: true
+---
+
+# Git commit author email
+
+When creating commits in this workspace, use the author email that matches where the code will be pushed:
+
+- **GitHub** (e.g. `github.com`, remotes named `origin` pointing at GitHub): set and use **`charu2722001@gmail.com`**.
+  - For a GitHub-only repo: `git config user.email "charu2722001@gmail.com"` in that repository (local config is fine).
+
+- **Azure DevOps** (e.g. `dev.azure.com`, ADO remotes): set and use **`charu.jain@ril.com`**.
+  - For an Azure DevOps–only repo: `git config user.email "charu.jain@ril.com"` in that repository.
+
+Before committing, if unsure which remote applies, check `git remote -v` and match the host. Never mix emails for the same remote by mistake.
